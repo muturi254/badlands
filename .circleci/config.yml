@@ -12,9 +12,17 @@ jobs:
         - image: circleci/node:13.8.0
     steps:
       - run: echo world
+  
+  print_name:
+    steps:
+      - run: echo "$NAME"
+    environment:
+      NAME: "JOHN DOE"
+      
 workflows:
   welcome:
     jobs:
+      - print_name
       - print_hello
       - print_world:
           requires:
