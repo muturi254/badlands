@@ -1,22 +1,15 @@
 version: 2.1
 
-# commands:
-#   job_fail:
-#     description: "intentional job fail"
-#     steps:
-#       - run "echo 2"
-
 jobs:
-  test_job_fail:
+  test_failure:
     docker:
-      - image: circleci/node:13.8.0.
+      - image: circleci/node:13.8.0
     steps:
-      - run "echo 2"
+      - run echo "jejeje"
       - run:
-          name: "handle fail"
-          command: echo "sky net ... sky net"
-          when: on_fail
+        command: echo "sema kimeumana"
+        when: on_fail
 
 workflows:
-  job_failure:
-    - test_job_fail
+  badlands:
+    - test_failure
