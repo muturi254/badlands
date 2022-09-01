@@ -21,6 +21,27 @@ jobs:
     environment:
       NAME: "JOHN DOE"
 
+  save_hello_world_output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "saving output to file"
+          COMMAND: echo "amazing world hello" >> output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - target/output.txt
+            - build/*
+
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo "$NAME"
+      - attach_workspace:
+          at: /tmp/workspace
+
 workflows:
   welcome:
     jobs:
@@ -29,4 +50,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - save_hello_world_output
+      - print_output_file
 
