@@ -1,17 +1,17 @@
 version: 2.1
 
-commands:
-  job_fail:
-    description: "intentional job fail"
-    steps:
-      - run "echo 2"
+# commands:
+#   job_fail:
+#     description: "intentional job fail"
+#     steps:
+#       - run "echo 2"
 
 jobs:
   test_job_fail:
     docker:
       - image: circleci/node:13.8.0.
     steps:
-      - job_fail
+      - run "echo 2"
       - run:
           name: "handle fail"
           command: echo "sky net ... sky net"
