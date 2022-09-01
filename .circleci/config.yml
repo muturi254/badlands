@@ -7,8 +7,8 @@ jobs:
     steps:
       - run: exit 1
       - run:
-        command: echo "sema kimeumana"
-        when: on_fail
+          command: echo "sema kimeumana"
+          when: on_fail
 
 workflows:
   badlands:
