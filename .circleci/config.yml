@@ -12,4 +12,5 @@ jobs:
 
 workflows:
   badlands:
-    - test_failure
+    jobs:
+      - test_failure
