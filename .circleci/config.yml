@@ -18,5 +18,5 @@ jobs:
           when: on_fail
 
 workflows:
-  Test:
+  job_failure:
     - test_job_fail
