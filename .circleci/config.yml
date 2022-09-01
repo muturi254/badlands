@@ -26,7 +26,6 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run:
-          name: "saving output to file"
           COMMAND: echo "amazing world hello" >> output.txt
       - persist_to_workspace:
           root: /tmp/workspace
