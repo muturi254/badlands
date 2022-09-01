@@ -29,7 +29,7 @@ jobs:
           name: "saving output to file"
           command: echo "amazing world hello" > output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ./
           paths:
             - output.txt
             - build/*
@@ -40,7 +40,7 @@ jobs:
     steps:
       - run: echo "$NAME"
       - attach_workspace:
-          at: /tmp/workspace
+          at: ./
 
 workflows:
   welcome:
