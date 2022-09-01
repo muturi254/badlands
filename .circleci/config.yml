@@ -27,11 +27,11 @@ jobs:
     steps:
       - run:
           name: "saving output to file"
-          command: echo "amazing world hello" >> output.txt
+          command: echo "amazing world hello" > output.txt
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - target/output.txt
+            - output.txt
             - build/*
 
   print_output_file:
