@@ -1,70 +1,22 @@
 version: 2.1
 
 commands:
-  print_pipeline_id:
-    description: "A very simple command for demonstration purposes"
+  job_fail:
+    description: "intentional job fail"
     steps:
-        - run: echo $CIRCLE_WORKFLOW_ID
+      - run "echo 2"
 
 jobs:
-  print_hello:
+  test_job_fail:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:13.8.0.
     steps:
-      - run: echo hello
-
-  print_world:
-    docker:
-        - image: circleci/node:13.8.0
-    steps:
-      - run: echo world
-  
-  print_name:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo "$NAME"
-    environment:
-      NAME: "JOHN DOE"
-
-  save_hello_world_output:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
+      - job_fail
       - run:
-          name: "saving output to file"
-          command: echo "amazing world hello" > output.txt
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - output.txt
-            - build/*
-
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: ./
-      - run: cat output.txt
-
-  print_workflow_id:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - print_pipeline_id
+          name: "handle fail"
+          command: echo "sky net ... sky net"
+          when: on_fail
 
 workflows:
-  welcome:
-    jobs:
-      # - print_name
-      # - print_hello
-      # - print_world:
-      #     requires:
-      #       - print_hello
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
-      - print_workflow_id
-
+  Test:
+    - test_job_fail
