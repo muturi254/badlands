@@ -51,7 +51,8 @@ jobs:
   print_workflow_id:
     docker:
       - image: circleci/node:13.8.0
-    - print_pipeline_id
+    steps:
+      - print_pipeline_id
 
 workflows:
   welcome:
